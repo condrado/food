@@ -1,4 +1,5 @@
-import { menu } from "../data.js";
+import { menu, horarios_diarios } from "../data.js";
+import { getActiveMeal } from "./dateHelper.js";
 
 const SECTION_TITLES = {
   "desayuno": "Desayuno",
@@ -6,6 +7,14 @@ const SECTION_TITLES = {
   "comida_principal_tupper": "Comida",
   "merienda": "Merienda",
   "cena_ligera": "Cena"
+};
+
+const TIME_TO_MENU_MAP = {
+  "desayuno": "desayuno",
+  "media_manana": "media_manana",
+  "comida": "comida_principal_tupper",
+  "merienda": "merienda",
+  "cena": "cena_ligera"
 };
 
 export function renderMenus(containerId) {
@@ -17,20 +26,27 @@ export function renderMenus(containerId) {
   const accordionContainer = document.createElement('div');
   accordionContainer.className = 'accordion-container';
 
+  // Determine active meal based on time
+  const activeTimeKey = getActiveMeal(horarios_diarios);
+  const activeMenuKey = activeTimeKey ? TIME_TO_MENU_MAP[activeTimeKey] : null;
+
   Object.keys(menu).forEach(key => {
     const sectionTitle = SECTION_TITLES[key] || key;
     const items = menu[key];
+    
+    // Check if this section should be expanded
+    const isExpanded = (key === activeMenuKey);
 
     // Accordion Item
     const itemEl = document.createElement('div');
-    itemEl.className = 'accordion-item';
+    itemEl.className = `accordion-item ${isExpanded ? 'open' : ''}`;
 
     // Header
     const headerBtn = document.createElement('button');
     headerBtn.className = 'accordion-header';
     headerBtn.innerHTML = `
       <span>${sectionTitle}</span>
-      <span class="icon">+</span>
+      <span class="icon">${isExpanded ? '-' : '+'}</span>
     `;
     
     // Content Container
@@ -56,6 +72,14 @@ export function renderMenus(containerId) {
         ${description}
         ${ingredients}
       `;
+      
+      // Toggle "Used/Eaten" state
+      card.addEventListener('click', (e) => {
+        // Prevent toggling if selecting text (optional, but good UX)
+        // For simplicity, just toggle
+        card.classList.toggle('used');
+      });
+
       optionsList.appendChild(card);
     });
 

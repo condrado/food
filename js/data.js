@@ -194,3 +194,11 @@ export const compra = [
   "Caldo de pollo desgrasado",
   "Caldo de pescado"
 ];
+
+export const horarios_diarios = {
+  "desayuno": "07:30 - 09:30",
+  "media_manana": "10:30 - 12:00",
+  "comida": "13:00 - 15:30",
+  "merienda": "17:00 - 18:00",
+  "cena": "20:00 - 22:00"
+}
