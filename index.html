@@ -3,10 +3,50 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Food App</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  
+  <div id="app">
+    <!-- Persistent Header -->
+    <header class="app-header">
+      <h1 id="app-title" class="title">Food App</h1>
+    </header>
+
+    <!-- Main Content Area (Scrollable) -->
+    <main class="app-content">
+      <!-- Home View (Dashboard/Welcome) -->
+      <div id="home" class="view active">
+        <div class="welcome-card">
+          <h2>Bienvenido</h2>
+          <p>Selecciona una opción abajo</p>
+        </div>
+      </div>
+
+      <!-- Menus View -->
+      <div id="menus" class="view">
+        <h2>Menús</h2>
+        <!-- Content will go here -->
+      </div>
+      
+      <!-- Shopping List View -->
+      <div id="shopping-list" class="view">
+        <h2>Lista de Compra</h2>
+        <!-- Content will go here -->
+      </div>
+    </main>
+
+    <!-- Persistent Bottom Navigation -->
+    <nav class="bottom-nav">
+      <button id="nav-menus" class="nav-btn">
+        Ver Menús
+      </button>
+      <button id="nav-list" class="nav-btn">
+        Lista de Compra
+      </button>
+    </nav>
+  </div>
 </body>
-<script src="/js/script.js"></script>
+<script type="module" src="/js/script.js"></script>
 </html>
